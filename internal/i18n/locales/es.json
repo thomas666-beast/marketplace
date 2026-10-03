@@ -1,0 +1,20 @@
+{
+  "health.ok": "El servicio está funcionando",
+  "health.db_ok": "La conexión a la base de datos es correcta",
+  "welcome": "Bienvenido al marketplace",
+  "errors.not_found": "Recurso no encontrado",
+  "errors.unauthorized": "No estás autorizado",
+  "errors.invalid_request": "Solicitud inválida",
+  "errors.internal": "Algo salió mal",
+
+  "auth.invalid_credentials": "Correo o contraseña incorrectos",
+  "auth.email_taken": "Ya existe una cuenta con este correo",
+  "auth.invalid_token": "Tu sesión ha expirado. Por favor inicia sesión de nuevo",
+  "auth.password_too_short": "La contraseña debe tener al menos 8 caracteres",
+  "auth.password_too_long": "La contraseña es demasiado larga",
+  "auth.invalid_email": "Introduce un correo válido",
+  "auth.invalid_display_name": "El nombre debe tener entre 2 y 100 caracteres",
+  "auth.invalid_role": "Tipo de cuenta inválido",
+  "auth.registration_success": "Cuenta creada correctamente",
+  "auth.login_success": "Has iniciado sesión correctamente"
+}

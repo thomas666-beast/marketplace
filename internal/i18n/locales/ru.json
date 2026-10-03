@@ -1,0 +1,20 @@
+{
+  "health.ok": "Сервис работает",
+  "health.db_ok": "Подключение к базе данных в порядке",
+  "welcome": "Добро пожаловать на маркетплейс",
+  "errors.not_found": "Ресурс не найден",
+  "errors.unauthorized": "Вы не авторизованы",
+  "errors.invalid_request": "Некорректный запрос",
+  "errors.internal": "Что-то пошло не так",
+
+  "auth.invalid_credentials": "Неверный email или пароль",
+  "auth.email_taken": "Аккаунт с таким email уже существует",
+  "auth.invalid_token": "Сессия истекла. Пожалуйста, войдите заново",
+  "auth.password_too_short": "Пароль должен содержать не менее 8 символов",
+  "auth.password_too_long": "Пароль слишком длинный",
+  "auth.invalid_email": "Введите корректный email",
+  "auth.invalid_display_name": "Имя должно содержать от 2 до 100 символов",
+  "auth.invalid_role": "Некорректный тип аккаунта",
+  "auth.registration_success": "Аккаунт успешно создан",
+  "auth.login_success": "Вы успешно вошли"
+}

@@ -1,0 +1,20 @@
+{
+  "health.ok": "Service is healthy",
+  "health.db_ok": "Database connection is healthy",
+  "welcome": "Welcome to the marketplace",
+  "errors.not_found": "Resource not found",
+  "errors.unauthorized": "You are not authorized",
+  "errors.invalid_request": "Invalid request",
+  "errors.internal": "Something went wrong",
+
+  "auth.invalid_credentials": "Incorrect email or password",
+  "auth.email_taken": "An account with this email already exists",
+  "auth.invalid_token": "Your session has expired. Please log in again",
+  "auth.password_too_short": "Password must be at least 8 characters",
+  "auth.password_too_long": "Password is too long",
+  "auth.invalid_email": "Please enter a valid email address",
+  "auth.invalid_display_name": "Display name must be between 2 and 100 characters",
+  "auth.invalid_role": "Invalid account type",
+  "auth.registration_success": "Account created successfully",
+  "auth.login_success": "Logged in successfully"
+}
