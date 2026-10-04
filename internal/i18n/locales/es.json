@@ -16,5 +16,28 @@
   "auth.invalid_display_name": "El nombre debe tener entre 2 y 100 caracteres",
   "auth.invalid_role": "Tipo de cuenta inválido",
   "auth.registration_success": "Cuenta creada correctamente",
-  "auth.login_success": "Has iniciado sesión correctamente"
+  "auth.login_success": "Has iniciado sesión correctamente",
+
+  "catalog.category_not_found": "Categoría no encontrada",
+  "catalog.product_not_found": "Producto no encontrado",
+  "catalog.not_owner": "No eres el propietario de este producto",
+  "catalog.forbidden": "No tienes permiso para realizar esta acción",
+  "catalog.invalid_price": "El precio debe ser un número positivo",
+  "catalog.invalid_currency": "La moneda debe ser RUB, USD o EUR",
+  "catalog.invalid_status": "El estado debe ser draft, active o archived",
+  "catalog.invalid_stock": "La cantidad en stock no puede ser negativa",
+  "catalog.invalid_name": "El nombre del producto debe tener entre 1 y 200 caracteres",
+  "catalog.invalid_limit": "El límite debe estar entre 1 y 100",
+  "catalog.invalid_cursor": "Cursor de paginación inválido",
+
+  "orders.not_found": "Pedido no encontrado",
+  "orders.empty": "El pedido debe contener al menos un artículo",
+  "orders.insufficient_stock": "No hay suficiente stock disponible",
+  "orders.product_not_found": "Uno de los productos no está disponible",
+  "orders.mixed_currency": "Todos los productos de un pedido deben usar la misma moneda",
+  "orders.invalid_quantity": "La cantidad debe ser al menos 1",
+  "orders.invalid_transition": "Esta acción no está permitida en el estado actual del pedido",
+  "orders.checkout_success": "Pedido realizado correctamente",
+  "orders.cancelled": "Pedido cancelado",
+  "orders.invalid_shipping": "Se requiere dirección de envío"
 }

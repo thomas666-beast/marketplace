@@ -16,5 +16,27 @@
   "auth.invalid_display_name": "Display name must be between 2 and 100 characters",
   "auth.invalid_role": "Invalid account type",
   "auth.registration_success": "Account created successfully",
-  "auth.login_success": "Logged in successfully"
+  "auth.login_success": "Logged in successfully",
+
+  "catalog.category_not_found": "Category not found",
+  "catalog.product_not_found": "Product not found",
+  "catalog.not_owner": "You do not own this product",
+  "catalog.forbidden": "You do not have permission to perform this action",
+  "catalog.invalid_price": "Price must be a positive number",
+  "catalog.invalid_currency": "Currency must be RUB, USD, or EUR",
+  "catalog.invalid_status": "Status must be draft, active, or archived",
+  "catalog.invalid_stock": "Stock quantity cannot be negative",
+  "catalog.invalid_name": "Product name must be between 1 and 200 characters",
+  "catalog.invalid_limit": "Limit must be between 1 and 100",
+  "catalog.invalid_cursor": "Invalid pagination cursor",
+  "orders.not_found": "Order not found",
+  "orders.empty": "Order must contain at least one item",
+  "orders.insufficient_stock": "Not enough stock available for one of the products",
+  "orders.product_not_found": "One of the products is not available",
+  "orders.mixed_currency": "All products in an order must use the same currency",
+  "orders.invalid_quantity": "Quantity must be at least 1",
+  "orders.invalid_transition": "This action is not allowed in the current order state",
+  "orders.checkout_success": "Order placed successfully",
+  "orders.cancelled": "Order cancelled",
+  "orders.invalid_shipping": "Shipping address is required"
 }

@@ -16,5 +16,28 @@
   "auth.invalid_display_name": "Имя должно содержать от 2 до 100 символов",
   "auth.invalid_role": "Некорректный тип аккаунта",
   "auth.registration_success": "Аккаунт успешно создан",
-  "auth.login_success": "Вы успешно вошли"
+  "auth.login_success": "Вы успешно вошли",
+
+  "catalog.category_not_found": "Категория не найдена",
+  "catalog.product_not_found": "Товар не найден",
+  "catalog.not_owner": "Вы не являетесь владельцем этого товара",
+  "catalog.forbidden": "У вас нет прав на это действие",
+  "catalog.invalid_price": "Цена должна быть положительным числом",
+  "catalog.invalid_currency": "Валюта должна быть RUB, USD или EUR",
+  "catalog.invalid_status": "Статус должен быть draft, active или archived",
+  "catalog.invalid_stock": "Количество на складе не может быть отрицательным",
+  "catalog.invalid_name": "Название товара должно содержать от 1 до 200 символов",
+  "catalog.invalid_limit": "Лимит должен быть от 1 до 100",
+  "catalog.invalid_cursor": "Некорректный курсор пагинации",
+
+  "orders.not_found": "Заказ не найден",
+  "orders.empty": "Заказ должен содержать хотя бы один товар",
+  "orders.insufficient_stock": "Недостаточно товара на складе",
+  "orders.product_not_found": "Один из товаров недоступен",
+  "orders.mixed_currency": "Все товары в заказе должны быть в одной валюте",
+  "orders.invalid_quantity": "Количество должно быть не менее 1",
+  "orders.invalid_transition": "Это действие недоступно в текущем статусе заказа",
+  "orders.checkout_success": "Заказ успешно оформлен",
+  "orders.cancelled": "Заказ отменён",
+  "orders.invalid_shipping": "Требуется адрес доставки"
 }

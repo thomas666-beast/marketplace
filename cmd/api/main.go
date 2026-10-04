@@ -9,9 +9,11 @@ import (
 	"time"
 
 	"github.com/thomas666-beast/marketplace/internal/auth"
+	"github.com/thomas666-beast/marketplace/internal/catalog"
 	"github.com/thomas666-beast/marketplace/internal/config"
 	"github.com/thomas666-beast/marketplace/internal/httpserver"
 	"github.com/thomas666-beast/marketplace/internal/i18n"
+	"github.com/thomas666-beast/marketplace/internal/orders"
 	"github.com/thomas666-beast/marketplace/internal/postgres"
 	"github.com/thomas666-beast/marketplace/internal/users"
 )
@@ -62,8 +64,14 @@ func main() {
 	}
 
 	userRepo := users.NewRepository(db.Pool)
+	categoryRepo := catalog.NewCategoryRepository(db.Pool)
+	productRepo := catalog.NewProductRepository(db.Pool)
+	orderRepo := orders.NewRepository(db.Pool)
 
-	srv := httpserver.New(cfg.AppPort, db, bundle, logger, userRepo, tokens)
+	srv := httpserver.New(
+		cfg.AppPort, db, bundle, logger,
+		userRepo, categoryRepo, productRepo, orderRepo, tokens,
+	)
 
 	go func() {
 		if err := srv.Start(); err != nil {
