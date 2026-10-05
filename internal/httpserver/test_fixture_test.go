@@ -17,10 +17,12 @@ import (
 
 	"github.com/thomas666-beast/marketplace/internal/auth"
 	"github.com/thomas666-beast/marketplace/internal/catalog"
+	"github.com/thomas666-beast/marketplace/internal/delivery"
 	"github.com/thomas666-beast/marketplace/internal/httpserver"
 	"github.com/thomas666-beast/marketplace/internal/i18n"
 	"github.com/thomas666-beast/marketplace/internal/orders"
 	"github.com/thomas666-beast/marketplace/internal/postgres"
+	"github.com/thomas666-beast/marketplace/internal/seller"
 	"github.com/thomas666-beast/marketplace/internal/users"
 )
 
@@ -28,6 +30,7 @@ const testSecret = "test-secret-must-be-at-least-32-bytes-long-ok"
 
 type serverFixture struct {
 	url string
+	db  *postgres.DB
 }
 
 func setupServerFixture(t *testing.T) *serverFixture {
@@ -77,15 +80,19 @@ func setupServerFixture(t *testing.T) *serverFixture {
 	catRepo := catalog.NewCategoryRepository(db.Pool)
 	prodRepo := catalog.NewProductRepository(db.Pool)
 	orderRepo := orders.NewRepository(db.Pool)
+	pickupPointRepo := delivery.NewPickupPointRepository(db.Pool)
+	deliveryRepo := delivery.NewRepository(db.Pool)
+	addressRepo := seller.NewAddressRepository(db.Pool)
 
 	srv := httpserver.New(
 		"8080", db, bundle, logger,
-		userRepo, catRepo, prodRepo, orderRepo, tokens,
+		userRepo, catRepo, prodRepo, orderRepo,
+		pickupPointRepo, deliveryRepo, addressRepo, tokens,
 	)
 	ts := httptest.NewServer(srv.Handler())
 	t.Cleanup(ts.Close)
 
-	return &serverFixture{url: ts.URL}
+	return &serverFixture{url: ts.URL, db: db}
 }
 
 func postJSON(t *testing.T, url string, body any, headers map[string]string) (*http.Response, []byte) {

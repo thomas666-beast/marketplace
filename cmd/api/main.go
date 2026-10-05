@@ -16,6 +16,8 @@ import (
 	"github.com/thomas666-beast/marketplace/internal/orders"
 	"github.com/thomas666-beast/marketplace/internal/postgres"
 	"github.com/thomas666-beast/marketplace/internal/users"
+	"github.com/thomas666-beast/marketplace/internal/delivery"
+	"github.com/thomas666-beast/marketplace/internal/seller"
 )
 
 func main() {
@@ -67,10 +69,14 @@ func main() {
 	categoryRepo := catalog.NewCategoryRepository(db.Pool)
 	productRepo := catalog.NewProductRepository(db.Pool)
 	orderRepo := orders.NewRepository(db.Pool)
+	pickupPointRepo := delivery.NewPickupPointRepository(db.Pool)
+	deliveryRepo := delivery.NewRepository(db.Pool)
+	addressRepo := seller.NewAddressRepository(db.Pool)
 
 	srv := httpserver.New(
 		cfg.AppPort, db, bundle, logger,
-		userRepo, categoryRepo, productRepo, orderRepo, tokens,
+		userRepo, categoryRepo, productRepo, orderRepo,
+		pickupPointRepo, deliveryRepo, addressRepo, tokens,
 	)
 
 	go func() {

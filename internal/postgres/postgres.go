@@ -44,3 +44,11 @@ func (db *DB) Close() {
 		db.Pool.Close()
 	}
 }
+
+// Exec runs a statement and returns the error, if any.
+// Intended for administrative and test operations; production queries
+// should go through dedicated repositories.
+func (db *DB) Exec(ctx context.Context, sql string, args ...any) error {
+	_, err := db.Pool.Exec(ctx, sql, args...)
+	return err
+}

@@ -124,3 +124,65 @@ type orderListResponse struct {
 	Items      []orderResponse `json:"items"`
 	NextCursor string          `json:"next_cursor,omitempty"`
 }
+
+type dashboardDeliveryInfo struct {
+	ID           string `json:"id"`
+	Status       string `json:"status"`
+	Tracking     string `json:"tracking_number"`
+	PickupCode   string `json:"pickup_code,omitempty"`
+}
+
+type dashboardRowResponse struct {
+	Order    orderResponse         `json:"order"`
+	Delivery *dashboardDeliveryInfo `json:"delivery,omitempty"`
+}
+
+type dashboardCountsResponse struct {
+	AwaitingPayment int `json:"awaiting_payment"`
+	ReadyToDispatch int `json:"ready_to_dispatch"`
+	InDelivery      int `json:"in_delivery"`
+	Completed       int `json:"completed"`
+	Cancelled       int `json:"cancelled"`
+}
+
+type dashboardResponse struct {
+	Counts     dashboardCountsResponse `json:"counts"`
+	Items      []dashboardRowResponse  `json:"items"`
+	NextCursor string                  `json:"next_cursor,omitempty"`
+}
+
+func toDashboardResponse(page orders.DashboardPage) dashboardResponse {
+	out := dashboardResponse{
+		Counts: dashboardCountsResponse{
+			AwaitingPayment: page.Counts.AwaitingPayment,
+			ReadyToDispatch: page.Counts.ReadyToDispatch,
+			InDelivery:      page.Counts.InDelivery,
+			Completed:       page.Counts.Completed,
+			Cancelled:       page.Counts.Cancelled,
+		},
+		Items:      make([]dashboardRowResponse, 0, len(page.Items)),
+		NextCursor: page.NextCursor,
+	}
+	for _, row := range page.Items {
+		r := dashboardRowResponse{
+			Order: toOrderResponse(row.Order, nil),
+		}
+		if row.DeliveryID != nil {
+			r.Delivery = &dashboardDeliveryInfo{
+				ID:         *row.DeliveryID,
+				Status:     derefString(row.DeliveryStatus),
+				Tracking:   derefString(row.DeliveryTracking),
+				PickupCode: derefString(row.DeliveryPickupCode),
+			}
+		}
+		out.Items = append(out.Items, r)
+	}
+	return out
+}
+
+func derefString(s *string) string {
+	if s == nil {
+		return ""
+	}
+	return *s
+}

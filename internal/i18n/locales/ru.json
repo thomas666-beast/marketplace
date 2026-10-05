@@ -39,5 +39,33 @@
   "orders.invalid_transition": "Это действие недоступно в текущем статусе заказа",
   "orders.checkout_success": "Заказ успешно оформлен",
   "orders.cancelled": "Заказ отменён",
-  "orders.invalid_shipping": "Требуется адрес доставки"
+  "orders.invalid_shipping": "Требуется адрес доставки",
+
+  "delivery.not_found": "Доставка не найдена",
+  "delivery.pickup_point_not_found": "Пункт выдачи не найден",
+  "delivery.pickup_point_inactive": "Этот пункт выдачи недоступен",
+  "delivery.already_exists": "Для этого заказа уже создана доставка",
+  "delivery.order_not_paid": "Заказ должен быть оплачен перед отправкой",
+  "delivery.not_owner": "Вы не являетесь владельцем этого заказа",
+  "delivery.invalid_transition": "Это изменение статуса недоступно",
+  "delivery.invalid_pickup_code": "Неверный код получения",
+  "delivery.not_ready": "Доставка ещё не готова к выдаче",
+  "delivery.missing_pickup_point": "Необходимо выбрать пункт выдачи",
+  "delivery.invalid_radius": "Радиус должен быть от 0.1 до 50 км",
+
+  "seller.address_not_found": "Адрес не найден",
+  "seller.invalid_address": "Проверьте данные адреса",
+  "seller.no_default_address": "Адрес по умолчанию не задан",
+  "seller.address_created": "Адрес добавлен",
+  "seller.address_updated": "Адрес обновлён",
+  "seller.address_deleted": "Адрес удалён",
+  "seller.default_set": "Адрес по умолчанию обновлён",
+  "seller.missing_pickup_point": "Необходимо выбрать пункт выдачи",
+
+  "seller.dashboard_ready_to_dispatch": "Готово к отправке",
+  "seller.dashboard_in_delivery": "В доставке",
+  "seller.dashboard_awaiting_payment": "Ожидает оплаты",
+  "seller.dashboard_completed": "Завершено",
+  "seller.dashboard_cancelled": "Отменено",
+  "seller.invalid_dashboard_filter": "Некорректный фильтр"
 }

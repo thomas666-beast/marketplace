@@ -246,3 +246,40 @@ func (s *Server) mapOrderTransitionError(w http.ResponseWriter, r *http.Request,
 		s.errorResponse(w, r, http.StatusInternalServerError, "internal", "errors.internal")
 	}
 }
+
+func (s *Server) handleSellerDashboard(w http.ResponseWriter, r *http.Request) {
+	sellerID, _ := r.Context().Value(ctxUserID).(string)
+
+	q := r.URL.Query()
+	filter := orders.DashboardFilter(q.Get("filter"))
+	if filter == "" {
+		filter = orders.DashboardAll
+	}
+
+	cursor := q.Get("cursor")
+	limit := 20
+	if limitStr := q.Get("limit"); limitStr != "" {
+		n, err := parseLimit(limitStr)
+		if err != nil {
+			s.errorResponse(w, r, http.StatusBadRequest, "invalid_limit", "catalog.invalid_limit")
+			return
+		}
+		limit = n
+	}
+
+	page, err := s.orders.Dashboard(r.Context(), sellerID, filter, cursor, limit)
+	if err != nil {
+		switch {
+		case strings.Contains(err.Error(), "invalid dashboard filter"):
+			s.errorResponse(w, r, http.StatusBadRequest, "invalid_filter", "seller.invalid_dashboard_filter")
+		case strings.Contains(err.Error(), "invalid cursor"):
+			s.errorResponse(w, r, http.StatusBadRequest, "invalid_cursor", "catalog.invalid_cursor")
+		default:
+			s.logger.Error("dashboard failed", "err", err)
+			s.errorResponse(w, r, http.StatusInternalServerError, "internal", "errors.internal")
+		}
+		return
+	}
+
+	s.writeJSON(w, http.StatusOK, toDashboardResponse(page))
+}

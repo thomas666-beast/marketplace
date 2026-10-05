@@ -38,5 +38,33 @@
   "orders.invalid_transition": "This action is not allowed in the current order state",
   "orders.checkout_success": "Order placed successfully",
   "orders.cancelled": "Order cancelled",
-  "orders.invalid_shipping": "Shipping address is required"
+  "orders.invalid_shipping": "Shipping address is required",
+
+  "delivery.not_found": "Delivery not found",
+  "delivery.pickup_point_not_found": "Pickup point not found",
+  "delivery.pickup_point_inactive": "This pickup point is not available",
+  "delivery.already_exists": "This order already has a delivery",
+  "delivery.order_not_paid": "Order must be paid before dispatch",
+  "delivery.not_owner": "You do not own this order",
+  "delivery.invalid_transition": "This status change is not allowed",
+  "delivery.invalid_pickup_code": "Incorrect pickup code",
+  "delivery.not_ready": "Delivery is not ready for pickup yet",
+  "delivery.missing_pickup_point": "Pickup point is required",
+  "delivery.invalid_radius": "Radius must be between 0.1 and 50 km",
+
+  "seller.address_not_found": "Address not found",
+  "seller.invalid_address": "Please check the address details",
+  "seller.no_default_address": "No default address set",
+  "seller.address_created": "Address added",
+  "seller.address_updated": "Address updated",
+  "seller.address_deleted": "Address removed",
+  "seller.default_set": "Default address updated",
+  "seller.missing_pickup_point": "Pickup point is required",
+
+  "seller.dashboard_ready_to_dispatch": "Ready to dispatch",
+  "seller.dashboard_in_delivery": "In delivery",
+  "seller.dashboard_awaiting_payment": "Awaiting payment",
+  "seller.dashboard_completed": "Completed",
+  "seller.dashboard_cancelled": "Cancelled",
+  "seller.invalid_dashboard_filter": "Invalid dashboard filter"
 }

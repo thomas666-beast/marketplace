@@ -39,5 +39,33 @@
   "orders.invalid_transition": "Esta acción no está permitida en el estado actual del pedido",
   "orders.checkout_success": "Pedido realizado correctamente",
   "orders.cancelled": "Pedido cancelado",
-  "orders.invalid_shipping": "Se requiere dirección de envío"
+  "orders.invalid_shipping": "Se requiere dirección de envío",
+
+  "delivery.not_found": "Entrega no encontrada",
+  "delivery.pickup_point_not_found": "Punto de recogida no encontrado",
+  "delivery.pickup_point_inactive": "Este punto de recogida no está disponible",
+  "delivery.already_exists": "Este pedido ya tiene una entrega",
+  "delivery.order_not_paid": "El pedido debe estar pagado antes del envío",
+  "delivery.not_owner": "No eres el propietario de este pedido",
+  "delivery.invalid_transition": "Este cambio de estado no está permitido",
+  "delivery.invalid_pickup_code": "Código de recogida incorrecto",
+  "delivery.not_ready": "La entrega aún no está lista para recoger",
+  "delivery.missing_pickup_point": "Se requiere un punto de recogida",
+  "delivery.invalid_radius": "El radio debe estar entre 0.1 y 50 km",
+
+  "seller.address_not_found": "Dirección no encontrada",
+  "seller.invalid_address": "Verifica los datos de la dirección",
+  "seller.no_default_address": "No hay dirección predeterminada",
+  "seller.address_created": "Dirección añadida",
+  "seller.address_updated": "Dirección actualizada",
+  "seller.address_deleted": "Dirección eliminada",
+  "seller.default_set": "Dirección predeterminada actualizada",
+  "seller.missing_pickup_point": "Se requiere un punto de recogida",
+
+  "seller.dashboard_ready_to_dispatch": "Listo para enviar",
+  "seller.dashboard_in_delivery": "En entrega",
+  "seller.dashboard_awaiting_payment": "Esperando pago",
+  "seller.dashboard_completed": "Completado",
+  "seller.dashboard_cancelled": "Cancelado",
+  "seller.invalid_dashboard_filter": "Filtro de panel inválido"
 }

@@ -466,3 +466,178 @@ func decodeCursor(cursor string) (time.Time, string, error) {
 	}
 	return t, parts[1], nil
 }
+
+// DashboardFilter selects which slice of the seller's orders to return.
+type DashboardFilter string
+
+const (
+	DashboardReadyToDispatch DashboardFilter = "ready_to_dispatch"
+	DashboardInDelivery      DashboardFilter = "in_delivery"
+	DashboardAwaitingPayment DashboardFilter = "awaiting_payment"
+	DashboardCompleted       DashboardFilter = "completed"
+	DashboardCancelled       DashboardFilter = "cancelled"
+	DashboardAll             DashboardFilter = "all"
+)
+
+// DashboardRow is one order in the seller dashboard, with delivery status folded in.
+type DashboardRow struct {
+	Order              Order
+	DeliveryID         *string
+	DeliveryStatus     *string
+	DeliveryTracking   *string
+	DeliveryPickupCode *string
+}
+
+// DashboardCounts are the summary numbers shown at the top of the dashboard.
+type DashboardCounts struct {
+	AwaitingPayment int
+	ReadyToDispatch int
+	InDelivery      int
+	Completed       int
+	Cancelled       int
+}
+
+// DashboardPage is the full dashboard response.
+type DashboardPage struct {
+	Counts     DashboardCounts
+	Items      []DashboardRow
+	NextCursor string
+}
+
+// Dashboard returns the seller's orders with delivery status, filtered and paginated.
+func (r *Repository) Dashboard(
+	ctx context.Context,
+	sellerID string,
+	filter DashboardFilter,
+	cursor string,
+	limit int,
+) (DashboardPage, error) {
+	if limit <= 0 {
+		limit = 20
+	}
+	if limit > 100 {
+		limit = 100
+	}
+
+	// 1. Counts (always full, unfiltered by cursor/filter).
+	counts, err := r.dashboardCounts(ctx, sellerID)
+	if err != nil {
+		return DashboardPage{}, err
+	}
+
+	// 2. List with filter.
+	where := []string{"o.seller_id = $1"}
+	args := []any{sellerID}
+	i := 2
+
+	switch filter {
+	case DashboardAll, "":
+		// no additional filter
+	case DashboardReadyToDispatch:
+		where = append(where, "o.status = 'paid'")
+		where = append(where, "d.id IS NULL")
+	case DashboardInDelivery:
+		where = append(where, "d.id IS NOT NULL")
+		where = append(where, "d.status NOT IN ('picked_up', 'returned', 'cancelled')")
+	case DashboardAwaitingPayment:
+		where = append(where, "o.status = 'pending_payment'")
+	case DashboardCompleted:
+		where = append(where, "o.status = 'completed'")
+	case DashboardCancelled:
+		where = append(where, "(o.status = 'cancelled' OR d.status = 'returned')")
+	default:
+		return DashboardPage{}, fmt.Errorf("invalid dashboard filter: %s", filter)
+	}
+
+	if cursor != "" {
+		createdAt, id, err := decodeCursor(cursor)
+		if err != nil {
+			return DashboardPage{}, fmt.Errorf("invalid cursor: %w", err)
+		}
+		where = append(where, fmt.Sprintf("(o.created_at, o.id) < ($%d, $%d)", i, i+1))
+		args = append(args, createdAt, id)
+		i += 2
+	}
+
+	q := fmt.Sprintf(`
+		SELECT
+			o.id, o.order_number, o.buyer_id, o.seller_id, o.status,
+			o.subtotal_cents, o.shipping_cents, o.total_cents, o.currency,
+			o.shipping_address, o.note,
+			o.cancelled_reason, o.cancelled_at,
+			o.paid_at, o.shipped_at, o.delivered_at, o.completed_at,
+			o.created_at, o.updated_at,
+			d.id, d.status, d.tracking_number, d.pickup_code
+		FROM orders o
+		LEFT JOIN deliveries d ON d.order_id = o.id
+		WHERE %s
+		ORDER BY o.created_at DESC, o.id DESC
+		LIMIT $%d
+	`, strings.Join(where, " AND "), i)
+	args = append(args, limit+1)
+
+	rows, err := r.pool.Query(ctx, q, args...)
+	if err != nil {
+		return DashboardPage{}, fmt.Errorf("dashboard query: %w", err)
+	}
+	defer rows.Close()
+
+	var items []DashboardRow
+	for rows.Next() {
+		var row DashboardRow
+		var addr []byte
+		err := rows.Scan(
+			&row.Order.ID, &row.Order.OrderNumber, &row.Order.BuyerID, &row.Order.SellerID,
+			&row.Order.Status, &row.Order.SubtotalCents, &row.Order.ShippingCents,
+			&row.Order.TotalCents, &row.Order.Currency,
+			&addr, &row.Order.Note,
+			&row.Order.CancelledReason, &row.Order.CancelledAt,
+			&row.Order.PaidAt, &row.Order.ShippedAt, &row.Order.DeliveredAt, &row.Order.CompletedAt,
+			&row.Order.CreatedAt, &row.Order.UpdatedAt,
+			&row.DeliveryID, &row.DeliveryStatus, &row.DeliveryTracking, &row.DeliveryPickupCode,
+		)
+		if err != nil {
+			return DashboardPage{}, fmt.Errorf("scan dashboard row: %w", err)
+		}
+		row.Order.ShippingAddress = json.RawMessage(addr)
+		items = append(items, row)
+	}
+	if err := rows.Err(); err != nil {
+		return DashboardPage{}, fmt.Errorf("iterate dashboard rows: %w", err)
+	}
+
+	page := DashboardPage{Counts: counts, Items: items}
+	if len(items) > limit {
+		last := items[limit-1]
+		page.Items = items[:limit]
+		page.NextCursor = encodeCursor(last.Order.CreatedAt, last.Order.ID)
+	}
+	return page, nil
+}
+
+func (r *Repository) dashboardCounts(ctx context.Context, sellerID string) (DashboardCounts, error) {
+	const q = `
+		SELECT
+			COUNT(*) FILTER (WHERE o.status = 'pending_payment') AS awaiting_payment,
+			COUNT(*) FILTER (WHERE o.status = 'paid' AND d.id IS NULL) AS ready_to_dispatch,
+			COUNT(*) FILTER (WHERE d.id IS NOT NULL
+			                  AND d.status NOT IN ('picked_up', 'returned', 'cancelled')) AS in_delivery,
+			COUNT(*) FILTER (WHERE o.status = 'completed') AS completed,
+			COUNT(*) FILTER (WHERE o.status = 'cancelled' OR d.status = 'returned') AS cancelled
+		FROM orders o
+		LEFT JOIN deliveries d ON d.order_id = o.id
+		WHERE o.seller_id = $1
+	`
+	var c DashboardCounts
+	err := r.pool.QueryRow(ctx, q, sellerID).Scan(
+		&c.AwaitingPayment,
+		&c.ReadyToDispatch,
+		&c.InDelivery,
+		&c.Completed,
+		&c.Cancelled,
+	)
+	if err != nil {
+		return DashboardCounts{}, fmt.Errorf("dashboard counts: %w", err)
+	}
+	return c, nil
+}

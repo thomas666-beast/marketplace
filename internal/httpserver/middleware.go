@@ -101,3 +101,26 @@ func (m *authMiddleware) requireSeller(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+func (m *authMiddleware) requireAdmin(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		role, _ := r.Context().Value(ctxRole).(string)
+		if role != "admin" {
+			locale := localeFromRequest(r)
+			messages := map[string]string{
+				"en": "You do not have permission to perform this action",
+				"ru": "У вас нет прав на это действие",
+				"es": "No tienes permiso para realizar esta acción",
+			}
+			msg := messages[locale]
+			if msg == "" {
+				msg = messages["en"]
+			}
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
+			w.WriteHeader(http.StatusForbidden)
+			_, _ = w.Write([]byte(`{"error":"forbidden","message":"` + msg + `"}`))
+			return
+		}
+		next.ServeHTTP(w, r)
+	}
+}
+

@@ -8,23 +8,28 @@ import (
 
 	"github.com/thomas666-beast/marketplace/internal/auth"
 	"github.com/thomas666-beast/marketplace/internal/catalog"
+	"github.com/thomas666-beast/marketplace/internal/delivery"
 	"github.com/thomas666-beast/marketplace/internal/i18n"
 	"github.com/thomas666-beast/marketplace/internal/orders"
 	"github.com/thomas666-beast/marketplace/internal/postgres"
+	"github.com/thomas666-beast/marketplace/internal/seller"
 	"github.com/thomas666-beast/marketplace/internal/users"
 )
 
 type Server struct {
-	httpServer *http.Server
-	db         *postgres.DB
-	i18n       *i18n.Bundle
-	logger     *slog.Logger
-	users      *users.Repository
-	categories *catalog.CategoryRepository
-	products   *catalog.ProductRepository
-	orders     *orders.Repository
-	tokens     *auth.TokenManager
-	mw         *authMiddleware
+	httpServer   *http.Server
+	db           *postgres.DB
+	i18n         *i18n.Bundle
+	logger       *slog.Logger
+	users        *users.Repository
+	categories   *catalog.CategoryRepository
+	products     *catalog.ProductRepository
+	orders       *orders.Repository
+	pickupPoints *delivery.PickupPointRepository
+	deliveries   *delivery.Repository
+	addresses    *seller.AddressRepository
+	tokens       *auth.TokenManager
+	mw           *authMiddleware
 }
 
 func New(
@@ -36,17 +41,23 @@ func New(
 	categoryRepo *catalog.CategoryRepository,
 	productRepo *catalog.ProductRepository,
 	orderRepo *orders.Repository,
+	pickupPointRepo *delivery.PickupPointRepository,
+	deliveryRepo *delivery.Repository,
+	addressRepo *seller.AddressRepository,
 	tokens *auth.TokenManager,
 ) *Server {
 	s := &Server{
-		db:         db,
-		i18n:       bundle,
-		logger:     logger,
-		users:      userRepo,
-		categories: categoryRepo,
-		products:   productRepo,
-		orders:     orderRepo,
-		tokens:     tokens,
+		db:           db,
+		i18n:         bundle,
+		logger:       logger,
+		users:        userRepo,
+		categories:   categoryRepo,
+		products:     productRepo,
+		orders:       orderRepo,
+		pickupPoints: pickupPointRepo,
+		deliveries:   deliveryRepo,
+		addresses:    addressRepo,
+		tokens:       tokens,
 	}
 	s.mw = newAuthMiddleware(tokens, userRepo)
 

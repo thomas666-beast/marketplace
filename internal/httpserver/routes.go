@@ -45,4 +45,42 @@ func (s *Server) registerRoutes(mux *http.ServeMux) {
 		s.mw.requireAuth(s.mw.requireSeller(s.handleListSellerOrders)))
 	mux.HandleFunc("POST /api/v1/seller/orders/{id}/ship",
 		s.mw.requireAuth(s.mw.requireSeller(s.handleShipOrder)))
+
+			// Public delivery tracking
+	mux.HandleFunc("GET /api/v1/delivery/track/{tracking_number}", s.handleTrackDelivery)
+
+	// Public pickup points
+	mux.HandleFunc("GET /api/v1/pickup-points", s.handleListPickupPoints)
+	mux.HandleFunc("GET /api/v1/pickup-points/nearby", s.handleListPickupPointsNearby)
+	mux.HandleFunc("GET /api/v1/pickup-points/{external_id}", s.handleGetPickupPoint)
+
+	// Buyer: get own delivery with pickup code
+	mux.HandleFunc("GET /api/v1/orders/{order_id}/delivery",
+		s.mw.requireAuth(s.handleGetMyOrderDelivery))
+
+	// Seller: dispatch an order
+	mux.HandleFunc("POST /api/v1/seller/orders/{order_id}/dispatch",
+		s.mw.requireAuth(s.mw.requireSeller(s.handleDispatchOrder)))
+
+	// Admin: delivery status transitions
+	mux.HandleFunc("POST /api/v1/admin/deliveries/{id}/{action}",
+		s.mw.requireAuth(s.mw.requireAdmin(s.handleAdminDeliveryTransition)))
+
+	// Seller addresses
+	mux.HandleFunc("GET /api/v1/seller/addresses",
+		s.mw.requireAuth(s.mw.requireSeller(s.handleListMyAddresses)))
+	mux.HandleFunc("POST /api/v1/seller/addresses",
+		s.mw.requireAuth(s.mw.requireSeller(s.handleCreateAddress)))
+	mux.HandleFunc("GET /api/v1/seller/addresses/{id}",
+		s.mw.requireAuth(s.mw.requireSeller(s.handleGetAddress)))
+	mux.HandleFunc("PATCH /api/v1/seller/addresses/{id}",
+		s.mw.requireAuth(s.mw.requireSeller(s.handleUpdateAddress)))
+	mux.HandleFunc("PUT /api/v1/seller/addresses/{id}/default",
+		s.mw.requireAuth(s.mw.requireSeller(s.handleSetDefaultAddress)))
+	mux.HandleFunc("DELETE /api/v1/seller/addresses/{id}",
+		s.mw.requireAuth(s.mw.requireSeller(s.handleDeleteAddress)))
+
+	// Seller orders dashboard
+	mux.HandleFunc("GET /api/v1/seller/orders/dashboard",
+		s.mw.requireAuth(s.mw.requireSeller(s.handleSellerDashboard)))
 }
