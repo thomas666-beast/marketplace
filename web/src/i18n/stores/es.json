@@ -1,0 +1,95 @@
+{
+  "app": {
+    "name": "Mercado"
+  },
+  "nav": {
+    "home": "Inicio",
+    "products": "Productos",
+    "profile": "Perfil",
+    "logout": "Salir",
+    "login": "Iniciar sesión",
+    "register": "Registrarse"
+  },
+  "home": {
+    "title": "Bienvenido al Mercado",
+    "subtitle": "Compra y vende con confianza.",
+    "browseProducts": "Ver productos"
+  },
+"products": {
+  "title": "Productos",
+  "empty": "No se encontraron productos",
+  "loading": "Cargando productos...",
+  "searchPlaceholder": "Buscar productos...",
+  "allCategories": "Todas las categorías",
+  "categoriesTitle": "Categorías",
+  "loadMore": "Cargar más",
+  "noMore": "Has llegado al final",
+  "outOfStock": "Sin stock",
+  "inStock": "En stock",
+  "addToCart": "Añadir al carrito",
+  "buyNow": "Comprar ahora",
+  "details": "Detalles",
+  "backToList": "Volver a productos",
+  "productNotFound": "Producto no encontrado",
+  "priceFrom": "Desde"
+},
+  "notFound": {
+    "title": "Página no encontrada",
+    "back": "Volver al inicio"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "retry": "Reintentar",
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
+  "auth": {
+    "email": "Correo",
+    "password": "Contraseña",
+    "displayName": "Nombre",
+    "role": "Tipo de cuenta",
+    "roleBuyer": "Comprador",
+    "roleSeller": "Vendedor",
+    "preferredLocale": "Idioma",
+    "signIn": "Iniciar sesión",
+    "signUp": "Crear cuenta",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "noAccount": "¿No tienes una cuenta?",
+    "loginTitle": "Iniciar sesión",
+    "registerTitle": "Crear tu cuenta",
+    "profileTitle": "Mi perfil",
+    "welcomeBack": "Bienvenido de nuevo",
+    "createdAt": "Miembro desde",
+    "emailVerified": "Correo verificado",
+    "yes": "Sí",
+    "no": "No",
+    "validation": {
+      "emailRequired": "El correo es obligatorio",
+      "emailInvalid": "Introduce un correo válido",
+      "passwordRequired": "La contraseña es obligatoria",
+      "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+      "displayNameRequired": "El nombre es obligatorio",
+      "displayNameTooShort": "El nombre es demasiado corto"
+    }
+  },
+  "cart": {
+    "title": "Carrito de compras",
+    "empty": "Tu carrito está vacío",
+    "emptyHint": "Explora productos y añade artículos a tu carrito.",
+    "browseProducts": "Ver productos",
+    "item": "artículo",
+    "items": "artículos",
+    "remove": "Eliminar",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "shippingNote": "Calculado al pagar",
+    "total": "Total",
+    "checkout": "Ir a pagar",
+    "continueShopping": "Seguir comprando",
+    "quantityLabel": "Cant.",
+    "maxStock": "Solo {n} en stock",
+    "addedToCart": "Añadido al carrito",
+    "clearCart": "Vaciar carrito"
+  }
+}

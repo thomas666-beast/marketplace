@@ -42,5 +42,13 @@ services:
     ports:
       - "8080:8080"
 
+  web:
+    build: ./web
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+
 volumes:
   pgdata:

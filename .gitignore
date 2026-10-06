@@ -49,3 +49,8 @@ config.local.yaml
 config.local.json
 
 /api
+
+web/node_modules/
+web/dist/
+web/.env
+web/.quasar/

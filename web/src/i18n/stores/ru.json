@@ -1,0 +1,95 @@
+{
+  "app": {
+    "name": "Маркетплейс"
+  },
+  "nav": {
+    "home": "Главная",
+    "products": "Товары",
+    "profile": "Профиль",
+    "logout": "Выйти",
+    "login": "Войти",
+    "register": "Регистрация"
+  },
+  "home": {
+    "title": "Добро пожаловать на маркетплейс",
+    "subtitle": "Покупайте и продавайте с уверенностью.",
+    "browseProducts": "Смотреть товары"
+  },
+"products": {
+  "title": "Товары",
+  "empty": "Товары не найдены",
+  "loading": "Загрузка товаров...",
+  "searchPlaceholder": "Поиск товаров...",
+  "allCategories": "Все категории",
+  "categoriesTitle": "Категории",
+  "loadMore": "Загрузить ещё",
+  "noMore": "Вы дошли до конца",
+  "outOfStock": "Нет в наличии",
+  "inStock": "В наличии",
+  "addToCart": "В корзину",
+  "buyNow": "Купить сейчас",
+  "details": "Подробнее",
+  "backToList": "Назад к товарам",
+  "productNotFound": "Товар не найден",
+  "priceFrom": "От"
+},
+  "notFound": {
+    "title": "Страница не найдена",
+    "back": "На главную"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Что-то пошло не так",
+    "retry": "Повторить",
+    "save": "Сохранить",
+    "cancel": "Отмена"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Пароль",
+    "displayName": "Имя",
+    "role": "Тип аккаунта",
+    "roleBuyer": "Покупатель",
+    "roleSeller": "Продавец",
+    "preferredLocale": "Язык",
+    "signIn": "Войти",
+    "signUp": "Создать аккаунт",
+    "alreadyHaveAccount": "Уже есть аккаунт?",
+    "noAccount": "Нет аккаунта?",
+    "loginTitle": "Вход",
+    "registerTitle": "Создание аккаунта",
+    "profileTitle": "Мой профиль",
+    "welcomeBack": "С возвращением",
+    "createdAt": "Дата регистрации",
+    "emailVerified": "Email подтверждён",
+    "yes": "Да",
+    "no": "Нет",
+    "validation": {
+      "emailRequired": "Введите email",
+      "emailInvalid": "Введите корректный email",
+      "passwordRequired": "Введите пароль",
+      "passwordTooShort": "Пароль должен содержать не менее 8 символов",
+      "displayNameRequired": "Введите имя",
+      "displayNameTooShort": "Имя слишком короткое"
+    }
+  },
+  "cart": {
+    "title": "Корзина",
+    "empty": "Корзина пуста",
+    "emptyHint": "Просмотрите товары и добавьте их в корзину.",
+    "browseProducts": "Смотреть товары",
+    "item": "товар",
+    "items": "товаров",
+    "remove": "Удалить",
+    "subtotal": "Подытог",
+    "shipping": "Доставка",
+    "shippingNote": "Рассчитывается при оформлении",
+    "total": "Итого",
+    "checkout": "Перейти к оформлению",
+    "continueShopping": "Продолжить покупки",
+    "quantityLabel": "Кол-во",
+    "maxStock": "В наличии только {n}",
+    "addedToCart": "Добавлено в корзину",
+    "clearCart": "Очистить корзину"
+  }
+}

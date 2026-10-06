@@ -1,0 +1,95 @@
+{
+  "app": {
+    "name": "Marketplace"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "profile": "Profile",
+    "logout": "Log out",
+    "login": "Log in",
+    "register": "Sign up"
+  },
+  "home": {
+    "title": "Welcome to the Marketplace",
+    "subtitle": "Buy and sell with confidence.",
+    "browseProducts": "Browse products"
+  },
+  "products": {
+  "title": "Products",
+  "empty": "No products found",
+  "loading": "Loading products...",
+  "searchPlaceholder": "Search products...",
+  "allCategories": "All categories",
+  "categoriesTitle": "Categories",
+  "loadMore": "Load more",
+  "noMore": "You've reached the end",
+  "outOfStock": "Out of stock",
+  "inStock": "In stock",
+  "addToCart": "Add to cart",
+  "buyNow": "Buy now",
+  "details": "Details",
+  "backToList": "Back to products",
+  "productNotFound": "Product not found",
+  "priceFrom": "From"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "back": "Back to home"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "displayName": "Display name",
+    "role": "Account type",
+    "roleBuyer": "Buyer",
+    "roleSeller": "Seller",
+    "preferredLocale": "Language",
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "alreadyHaveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "loginTitle": "Log in",
+    "registerTitle": "Create your account",
+    "profileTitle": "My profile",
+    "welcomeBack": "Welcome back",
+    "createdAt": "Member since",
+    "emailVerified": "Email verified",
+    "yes": "Yes",
+    "no": "No",
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "displayNameRequired": "Display name is required",
+      "displayNameTooShort": "Display name is too short"
+    }
+  },
+  "cart": {
+    "title": "Shopping cart",
+    "empty": "Your cart is empty",
+    "emptyHint": "Browse products and add items to your cart.",
+    "browseProducts": "Browse products",
+    "item": "item",
+    "items": "items",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "shippingNote": "Calculated at checkout",
+    "total": "Total",
+    "checkout": "Proceed to checkout",
+    "continueShopping": "Continue shopping",
+    "quantityLabel": "Qty",
+    "maxStock": "Only {n} in stock",
+    "addedToCart": "Added to cart",
+    "clearCart": "Clear cart"
+  }
+}
